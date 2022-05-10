@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS AppUser;
+
+CREATE TABLE AppUser (
+    id INT AUTO_INCREMENT PRIMARY KEY ,
+    username VARCHAR(20) NOT NULL ,
+    password VARCHAR(20) NOT NULL
+);
+
+DROP TABLE IF EXISTS Team;
+
+CREATE TABLE Team (
+    id INT AUTO_INCREMENT PRIMARY KEY ,
+    dof DATE NOT NULL ,
+    name VARCHAR(20) NOT NULL ,
+    isSignedUp BOOLEAN NOT NULL DEFAULT FALSE,
+    championships INT not null default 0
+
+);
