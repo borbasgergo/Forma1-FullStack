@@ -1,6 +1,5 @@
 package com.example.forma1fullstack.Entity
 
-import org.hibernate.annotations.GenericGenerator
 import javax.persistence.*
 
 @Entity

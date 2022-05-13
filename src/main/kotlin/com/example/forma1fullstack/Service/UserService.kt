@@ -23,7 +23,7 @@ class UserService(
 
         val user = checkUser(loginRequest.username!!)
 
-        checkPassword(loginRequest.password!!, user.password)
+        checkPassword(user.password,loginRequest.password!!)
 
         try {
 
