@@ -1,1 +1,0 @@
-INSERT INTO AppUser (username, password) VALUES ( 'someusername', 'somepassword')

@@ -8,7 +8,7 @@ import javax.persistence.Id
 
 @Entity
 class Team(
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
     val name: String,

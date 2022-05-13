@@ -1,4 +1,7 @@
 package com.example.forma1fullstack.Entity.Response
 
-class Success {
+data class Success(
+    val data: Any?,
+) {
+    val error = false
 }
