@@ -1,0 +1,11 @@
+{
+  "HTTP_MODE": "http",
+  "HOST": "localhost",
+  "PORT": 8080,
+
+
+  "CHECK_JWT_URL": {
+    "URL_STRING": "/api/user/v1/jwt",
+    "METHOD": "POST"
+  }
+}
