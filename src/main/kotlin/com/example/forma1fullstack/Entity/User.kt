@@ -10,6 +10,7 @@ data class User(
 
     @Column(unique = true)
     val username: String,
+
     val password: String,
 ) {
 }

@@ -21,6 +21,14 @@ class TeamApi(
     private val teamService: IServiceCRUD<Team, Long>
 ) {
 
+    @GetMapping("/")
+    fun getAll() : ResponseEntity<Success> {
+
+        val teams = teamService.getAll()
+
+        return ResponseEntity.ok(Success(teams))
+    }
+
     @PostMapping("/")
     fun create(
         @Valid @RequestBody team: Team

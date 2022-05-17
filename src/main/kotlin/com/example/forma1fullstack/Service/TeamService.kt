@@ -43,4 +43,8 @@ class TeamService(
         return teamRepository.save(updatedTeam)
     }
 
+    override fun getAll(): MutableIterable<Team> {
+        return teamRepository.findAll()
+    }
+
 }

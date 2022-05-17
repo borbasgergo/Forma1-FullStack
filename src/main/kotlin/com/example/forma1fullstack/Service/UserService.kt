@@ -1,8 +1,10 @@
 package com.example.forma1fullstack.Service
 
+import com.example.forma1fullstack.Entity.Request.CheckJwtData
 import com.example.forma1fullstack.Entity.User
 import com.example.forma1fullstack.Entity.Request.LoginRegisterData
 import com.example.forma1fullstack.Entity.Response.Success
+import com.example.forma1fullstack.Entity.UserDTO
 import com.example.forma1fullstack.Exception.NotFoundByUsernameException
 import com.example.forma1fullstack.Exception.RegistrationException
 import com.example.forma1fullstack.Repository.UserRepository
@@ -21,7 +23,7 @@ class UserService(
         loginRequest: LoginRegisterData
     ) : Success {
 
-        val user = checkUser(loginRequest.username!!)
+        val user = findByUsername(loginRequest.username!!)
 
         checkPassword(user.password,loginRequest.password!!)
 
@@ -30,6 +32,7 @@ class UserService(
             val token = jwtService.generateToken(user.username)
 
             return Success(object {
+                val id: Long = user.Id
                 val token: String = token
             })
 
@@ -43,9 +46,15 @@ class UserService(
         registerRequest: LoginRegisterData
     ) : Success {
 
-        val hashedPassword = BCrypt.hashpw(registerRequest.password!!, BCrypt.gensalt(10))
+        val hashedPassword = BCrypt.hashpw(
+            registerRequest.password!!,
+            BCrypt.gensalt(10)
+        )
 
-        val user = User(username = registerRequest.username!!, password = hashedPassword)
+        val user = User(
+            username = registerRequest.username!!,
+            password = hashedPassword
+        )
 
         try {
             val savedUser: User = userRepository.save(user)
@@ -53,6 +62,7 @@ class UserService(
             val token = jwtService.generateToken(savedUser.username)
 
             return Success(object {
+                val id = savedUser.Id
                 val token = token
             })
 
@@ -61,11 +71,23 @@ class UserService(
         }
     }
 
-    @Throws(NotFoundByUsernameException::class)
-    private fun checkUser(username: String) : User {
-        return userRepository.findByUsername(username) // '!!' can be used safely because of the validation
+    fun getUserDTO(username: String): UserDTO {
+        val user = this.findByUsername(username)
+
+        return UserDTO(user)
+    }
+
+    @kotlin.jvm.Throws(NotFoundByUsernameException::class)
+    fun findByUsername(username: String): User {
+        return userRepository.findByUsername(username)
             ?: throw NotFoundByUsernameException()
     }
+
+    fun checkJwt(jwtData: CheckJwtData) {
+        if(!jwtService.validateToken(jwtData.jwt, jwtData.username))
+            throw java.lang.RuntimeException("Invalid token!")
+    }
+
 
     @Throws(java.lang.RuntimeException::class)
     private fun checkPassword(hash: String, purePsw: String) {

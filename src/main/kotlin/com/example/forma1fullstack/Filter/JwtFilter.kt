@@ -83,7 +83,7 @@ class JwtFilter(
 
     @Throws(java.lang.RuntimeException::class)
     private fun checkIfTokenValid(token: String, userDetails: UserDetails) {
-        if(!jwtService.validateToken(token,userDetails))
+        if(!jwtService.validateToken(token,userDetails.username))
             throw java.lang.RuntimeException("Token couldn't be validated, try again!")
     }
 

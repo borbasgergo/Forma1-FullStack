@@ -9,4 +9,6 @@ interface IServiceCRUD<T, ID> {
     fun deleteById(id: ID)
 
     fun update(t: T): T
+
+    fun getAll() : MutableIterable<T>
 }

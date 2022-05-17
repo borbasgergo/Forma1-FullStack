@@ -1,6 +1,7 @@
 package com.example.forma1fullstack.Entity.Request
 
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
 data class LoginRegisterData(
@@ -12,7 +13,7 @@ data class LoginRegisterData(
     )
     val username: String?,
 
-    @field:NotBlank(message = "Password is mandatory!")
+    @field:NotNull(message = "Password is mandatory!")
     @field:Size(
         min = 5,
         max = 20,

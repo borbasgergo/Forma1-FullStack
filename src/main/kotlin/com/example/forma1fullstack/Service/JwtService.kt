@@ -53,8 +53,8 @@ class JwtService(
             .signWith(secretKey).compact()
     }
 
-    fun validateToken(token: String, userDetails: UserDetails): Boolean {
+    fun validateToken(token: String, uname: String): Boolean {
         val username = extractUsername(token)
-        return username == userDetails.username && !isTokenExpired(token)
+        return username == uname && !isTokenExpired(token)
     }
 }

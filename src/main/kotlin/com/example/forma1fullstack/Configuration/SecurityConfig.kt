@@ -39,7 +39,7 @@ class SecurityConfig(
             .authorizeRequests()
             .antMatchers("/api/team/v1/**").authenticated()
             .and()
-            .cors().disable()
+            .cors().and()
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         http.addFilterBefore(JwtFilter(jwtService, userDetailService), UsernamePasswordAuthenticationFilter::class.java)
