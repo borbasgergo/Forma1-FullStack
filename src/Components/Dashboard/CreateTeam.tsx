@@ -26,21 +26,26 @@ export const CreateTeamDiv:FC= () => {
     }
 
     return (
-        <div>
+        <div className="flex flex-col mt-6">
 
-            <div>
-                <h4>
+            <div className="flex mx-auto">
+                <h4 className="my-auto">
                     Name of the team
                 </h4>
-                <input type="text" name="name" placeholder="Name..." onChange={(e) => {
+                <input
+                    className="ml-2 p-1 border border-2 border-gray-400 my-auto rounded-2xl"
+                    type="text"
+                    name="name"
+                    placeholder="Name..." onChange={(e) => {
                     setName(e.target.value)
                 }}/>
             </div>
-            <div>
+            <div className="flex mx-auto mt-4">
                 <h4>
                     Is the team signed up for the race year?
                 </h4>
                 <select
+                    className="ml-2"
                     value={isSignedUp.toString()}
                     onChange={(e) => {
                         if(e.target.value === "true") setIsSignedUp(true)
@@ -53,10 +58,12 @@ export const CreateTeamDiv:FC= () => {
                 </select>
             </div>
 
-            <div>
+            <div className="flex mx-auto mt-4">
                 <h4>Date of foundation</h4>
-                <div>
+                <div className="ml-2">
                     <DatePicker
+                        className="border border-2 border-gray-400"
+                        placeholderText="Click here"
                         value={dof.toString()}
                         onChange={(date:Date) => setDof(
                             `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2,"0")}-${date.getDate().toString().padStart(2, "0")}`
@@ -65,16 +72,20 @@ export const CreateTeamDiv:FC= () => {
                     />
                 </div>
             </div>
-            <div>
-                Championships
+            <div className="flex mx-auto mt-4">
+                <h4>Championships</h4>
 
                 <input type="number"
+                       className="border border-2 border-gray-400 ml-2"
+                       placeholder="Enter number here"
                        pattern='[0-9]'
                        onChange={(e) => setChampions(Number(e.target.value))}/>
             </div>
-            <div>
+            <div className="flex mx-auto mt-4">
 
-                <button onClick={() => createTeam()}>Create</button>
+                <button
+                    className="bg-blue-400 p-2 rounded-2xl hover:bg-blue-800 hover:text-gray-200"
+                    onClick={() => createTeam()}>Create Team</button>
             </div>
 
         </div>
