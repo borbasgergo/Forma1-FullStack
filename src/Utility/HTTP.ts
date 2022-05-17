@@ -1,58 +1,46 @@
 import {Json} from "./JSON";
 import {Url} from "./URL";
-import {IHttpService} from "./IHttpService";
+import {IDependencyMarker} from "../Interface/IDependencyMarker";
+import {HttpHelper} from "./HttpHelper";
+import {DependencyContainer} from "./DependencyContainer";
+import {storageFunction} from "../Function/localStorage";
+
 
 export type CheckJwtReturn = {
-    Id: number,
-    username: string,
-    isError: boolean
-} | {
+    Id?: number,
+    username?: string,
     isError: boolean,
-    error: string
+    error?: string
+    jwt?: string
 }
 
 
-export class Http {
+export class Http implements IDependencyMarker{
 
-    private readonly json: Json;
-    private readonly url: Url;
-    private readonly httpService: IHttpService
+
+    private readonly _DPContainer: DependencyContainer;
+    private readonly _url: Url;
 
     constructor(
-        json: Json,
-        url: Url,
-        httpService: IHttpService
+       dpc: DependencyContainer
     ) {
-        this.json = json
-        this.url = url
-        this.httpService = httpService
+        this._DPContainer = dpc
+
+        this._url = this._DPContainer.get("Url") as Url
     }
 
+    public async fetchHttp(path: string, requestMethod: string, body?: any) {
 
-    public async fetch_checkJwt(): Promise<CheckJwtReturn> {
-        console.log(this.json)
-        const path = this.json.JSONData.CHECK_JWT_URL.URL_STRING
-        const method = this.json.JSONData.CHECK_JWT_URL.METHOD
-        const url = this.url.BuildURL(path)
+        const url = this._url.BuildURL(path)
 
-        try {
-            const response = await fetch(url, {method})
-            this.httpService.checkResponseForNull(response)
-            const jsonData = await this.httpService.getJsonResponse(response)
-            this.httpService.checkJsonDataForError(jsonData)
-
-            return {
-                Id: jsonData.data.Id,
-                username: jsonData.data.username,
-                isError: false
-            }
-
-        } catch(error: any) {
-            return {
-                isError: true,
-                error: error.message
-            }
-        }
-
+        return await fetch(url, {
+            method: requestMethod,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + storageFunction.getUser().jwt
+            },
+            body: JSON.stringify(body)
+        })
     }
+
 }

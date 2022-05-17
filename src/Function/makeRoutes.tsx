@@ -2,9 +2,11 @@
 import {HomePage} from "../Components/HomePage";
 import {Navigate, Outlet} from "react-router-dom";
 import App from "../Components/Dashboard/App";
-
-
-
+import {TeamContainer} from "../Components/Dashboard/TeamContainer";
+import {ListOfTeams} from "../Components/Dashboard/ListOfTeams";
+import {CreateTeamDiv} from "../Components/Dashboard/CreateTeam";
+import {Login} from "../Components/Login";
+import {Register} from "../Components/Register";
 
 export const makeRoutes = (isLoggedIn: boolean) => [
     {
@@ -18,11 +20,15 @@ export const makeRoutes = (isLoggedIn: boolean) => [
                 children: [
                     {
                         path: "/app/",
-                        element: <>main</>
+                        element: <ListOfTeams/>
                     },
                     {
                         path: "/app/:id",
-                        element: <>APPPPP</>
+                        element: <TeamContainer />
+                    },
+                    {
+                        path: "/app/create",
+                        element: <CreateTeamDiv />
                     }
                 ]
 
@@ -32,6 +38,22 @@ export const makeRoutes = (isLoggedIn: boolean) => [
     },
     {
         path: '/',
-        element: <HomePage />
-    },
+        element: isLoggedIn ? <Navigate to="/app/" /> : <HomePage />,
+        children: [
+            {
+                path: "/",
+                element: <Outlet />,
+                children: [
+                    {
+                        path: "/login",
+                        element: <Login />
+                    },
+                    {
+                        path: "/register",
+                        element: <Register />
+                    }
+                ]
+            }
+        ]
+    }
 ];

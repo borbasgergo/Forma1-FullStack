@@ -1,13 +1,25 @@
 import {FC} from "react";
 
 
-type Props = {
+interface error {
     message: string
 }
-export const ErrorDiv:FC<Props> = ({message}) => {
+
+type Props = {
+    errors: error[]
+}
+export const ErrorDiv:FC<Props> = ({errors}) => {
     return (
         <div>
-            Reason: {message}
+        {
+            errors.map(error =>
+                 (
+                    <div>
+                        {error.message}
+                    </div>
+                )
+            )
+        }
         </div>
     )
 }

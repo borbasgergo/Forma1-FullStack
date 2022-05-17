@@ -1,7 +1,7 @@
 export interface User {
-    id: number,
-    username: string,
-    jwt: string,
+    id?: number,
+    username?: string,
+    jwt?: string,
     isLoggedIn: boolean
 }
 

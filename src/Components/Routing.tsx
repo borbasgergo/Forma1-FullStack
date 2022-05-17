@@ -5,9 +5,9 @@ import {UserContext} from "../Context/UserContext";
 
 export const Routing: FC = () => {
 
-    const user = useContext(UserContext)
+    const {user} = useContext(UserContext)
 
-    const routing = useRoutes(makeRoutes(user.isLoggedIn))
+    const routing = useRoutes(makeRoutes(user.isLoggedIn ?? false))
 
     return (
         <>

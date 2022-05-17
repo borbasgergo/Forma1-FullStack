@@ -1,17 +1,24 @@
-import React, {useContext} from "react";
-import {UserContext} from "../Context/UserContext";
+import React, {useContext, useState} from "react";
+import {ErrorDiv} from "./Error";
+import {Login} from "./Login";
+import {Outlet} from "react-router-dom";
+import {HomeHeader} from "./HomeHeader";
 
 export const HomePage = () => {
 
-    const user  = useContext(UserContext);
+
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col h-screen">
             <div className="h-16 bg-gray-300">
-                header
+                <HomeHeader />
             </div>
-            <div>
-                {user.username}
+            <div className="w-3/12 mx-auto my-auto">
+                <div className="flex flex-col">
+
+
+                    <Outlet />
+                </div>
             </div>
         </div>
     );

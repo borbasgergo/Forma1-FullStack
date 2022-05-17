@@ -4,19 +4,19 @@ import './index.css';
 import {Routing} from "./Components/Routing";
 import {BrowserRouter} from "react-router-dom";
 import {AuthProvider} from "./Context/Provider/AuthProvider";
-import {HttpProvider} from "./Context/Provider/HttpProvider";
+import {DependencyContainerProvider} from "./Context/Provider/DCProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-    <HttpProvider>
+    <DependencyContainerProvider>
         <AuthProvider>
             <BrowserRouter>
                 <Routing />
             </BrowserRouter>
         </AuthProvider>
-    </HttpProvider>
+    </DependencyContainerProvider>
 );
 
 

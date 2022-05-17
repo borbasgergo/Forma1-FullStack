@@ -1,4 +1,6 @@
-export class Json {
+import {IDependencyMarker} from "../Interface/IDependencyMarker";
+
+export class Json implements IDependencyMarker {
 
     public JSONData: any;
 

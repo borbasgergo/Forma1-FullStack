@@ -1,5 +1,6 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
+import {AppHeader} from "./Header/AppHeader";
 
 
 const App = () => {
@@ -8,11 +9,11 @@ const App = () => {
     return (
         <div className="flex flex-col">
 
-          <div className="h-16 bg-gray-300">
-            header
+          <div className="h-16">
+            <AppHeader/>
           </div>
 
-          <div>
+          <div className="pl-8 pr-8">
             <Outlet />
           </div>
 

@@ -4,8 +4,37 @@
   "PORT": 8080,
 
 
-  "CHECK_JWT_URL": {
-    "URL_STRING": "/api/user/v1/jwt",
+  "CHECK_JWT": {
+    "URL": "/api/user/v1/jwt",
     "METHOD": "POST"
+  },
+
+  "LOGIN": {
+    "URL": "/api/user/v1/login",
+    "METHOD": "POST"
+  },
+
+  "REGISTER": {
+    "URL": "/api/user/v1/signup",
+    "METHOD": "POST"
+  },
+
+  "TEAM": {
+    "GET_ALL": {
+      "URL": "/api/team/v1/",
+      "METHOD": "GET"
+    },
+    "CREATE": {
+      "URL": "/api/team/v1/",
+      "METHOD": "POST"
+    },
+    "GET_ONE": {
+      "URL": "/api/team/v1/",
+      "METHOD": "GET"
+    },
+    "DELETE": {
+      "URL": "/api/team/v1/",
+      "METHOD": "DELETE"
+    }
   }
 }
