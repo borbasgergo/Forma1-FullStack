@@ -1,3 +1,5 @@
 # Forma1-FullStack
 
-The solution is going to be seperated between branches `frontend` and `backend`
+The solution is seperated between branches `frontend` and `backend`.
+
+# See the branches for more informations about the stack used and how to start the apps.
